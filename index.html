@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Personlig Træner Spot DK</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ['Inter', 'sans-serif'],
+            },
+            colors: {
+              brand: {
+                dark: '#0f172a', // Slate 900
+                accent: '#22d3ee', // Cyan 400
+                highlight: '#f97316', // Orange 500
+              }
+            },
+            animation: {
+              'fade-in': 'fadeIn 0.5s ease-out',
+              'float': 'float 6s ease-in-out infinite',
+              'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+              'neon-pulse': 'neonPulse 3s infinite alternate',
+            },
+            keyframes: {
+              fadeIn: {
+                '0%': { opacity: '0', transform: 'translateY(10px)' },
+                '100%': { opacity: '1', transform: 'translateY(0)' },
+              },
+              float: {
+                '0%, 100%': { transform: 'translateY(0)' },
+                '50%': { transform: 'translateY(-15px)' },
+              },
+              neonPulse: {
+                '0%': { textShadow: '0 0 5px rgba(255,255,255,0.6), 0 0 10px rgba(255,255,255,0.4), 0 0 20px var(--neon-color)' },
+                '100%': { textShadow: '0 0 10px rgba(255,255,255,0.9), 0 0 20px rgba(255,255,255,0.7), 0 0 40px var(--neon-color)' },
+              }
+            }
+          }
+        }
+      }
+    </script>
+    <style>
+      body {
+        background-color: #0f172a;
+        color: #e2e8f0;
+      }
+      /* Custom Scrollbar */
+      ::-webkit-scrollbar {
+        width: 8px;
+      }
+      ::-webkit-scrollbar-track {
+        background: #0f172a; 
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #334155; 
+        border-radius: 4px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: #475569; 
+      }
+
+      /* --- NEON EFFECTS & ANIMATIONS --- */
+      
+      .neon-card {
+        transition: all 0.3s ease;
+      }
+      
+      .neon-card:hover {
+        transform: translateY(-5px);
+      }
+
+      /* Cyan Neon Glow (Box) */
+      .neon-glow-cyan {
+        box-shadow: 0 0 10px rgba(34, 211, 238, 0.2), inset 0 0 10px rgba(34, 211, 238, 0.1);
+        border: 1px solid rgba(34, 211, 238, 0.3);
+      }
+      
+      .neon-card:hover .neon-glow-cyan {
+        box-shadow: 0 0 25px rgba(34, 211, 238, 0.6), inset 0 0 15px rgba(34, 211, 238, 0.3);
+        border-color: rgba(34, 211, 238, 1);
+      }
+
+      /* Orange Neon Glow (Box) */
+      .neon-glow-orange {
+        box-shadow: 0 0 10px rgba(249, 115, 22, 0.2), inset 0 0 10px rgba(249, 115, 22, 0.1);
+        border: 1px solid rgba(249, 115, 22, 0.3);
+      }
+      
+      .neon-card:hover .neon-glow-orange {
+        box-shadow: 0 0 25px rgba(249, 115, 22, 0.6), inset 0 0 15px rgba(249, 115, 22, 0.3);
+        border-color: rgba(249, 115, 22, 1);
+      }
+
+      /* --- TEXT NEON --- */
+      .text-neon-cyan {
+        color: #fff;
+        --neon-color: #22d3ee;
+        animation: neonPulse 2s infinite alternate;
+      }
+      
+      .text-neon-orange {
+        color: #fff;
+        --neon-color: #f97316;
+        animation: neonPulse 2.5s infinite alternate;
+      }
+      
+      /* Icon Floating Delay Stagger */
+      .delay-100 { animation-delay: 0.1s; }
+      .delay-200 { animation-delay: 1.5s; }
+      .delay-300 { animation-delay: 3s; }
+      .delay-400 { animation-delay: 4.5s; }
+
+      /* --- MOBILE RESPONSIVE OVERRIDES (Strictly Additional) --- */
+      
+      @media screen and (max-width: 768px) {
+        /* 1. Dashboard & Forms: Maximize Width (95%) */
+        /* Forces containers that usually have fixed widths on desktop to adapt */
+        .max-w-7xl, .max-w-4xl, .max-w-2xl, .max-w-md {
+          width: 95% !important;
+          max-width: 95% !important;
+          margin-left: auto !important;
+          margin-right: auto !important;
+          padding-left: 0.5rem !important;
+          padding-right: 0.5rem !important;
+        }
+
+        /* 2. Navigation Tabs (Client Dashboard): Stack Vertically */
+        /* Targets the flex container used for tabs to force stacking */
+        .overflow-x-auto.border-b.no-scrollbar {
+          display: flex;
+          flex-direction: column;
+          height: auto !important;
+          overflow: visible !important;
+          border-bottom: none !important;
+          gap: 0.5rem;
+          margin-bottom: 2rem !important;
+          white-space: normal !important;
+        }
+
+        /* Tab Buttons Styling for Vertical Stack */
+        .overflow-x-auto.border-b.no-scrollbar > button {
+          width: 100%;
+          text-align: left;
+          padding: 1rem !important;
+          background-color: rgba(30, 41, 59, 0.5); /* slate-800/50 */
+          border: 1px solid #334155 !important; /* slate-700 */
+          border-radius: 0.5rem;
+          margin-bottom: 0.25rem;
+        }
+
+        /* Active State for Stacked Tabs */
+        .overflow-x-auto.border-b.no-scrollbar > button.text-brand-accent {
+          background-color: rgba(34, 211, 238, 0.1) !important;
+          border-color: #22d3ee !important;
+        }
+
+        /* 3. Navbar/Header Adjustments */
+        nav .flex.justify-between {
+          padding-left: 0.5rem;
+          padding-right: 0.5rem;
+        }
+        
+        /* Adjust CTA buttons in header on mobile */
+        nav button {
+           font-size: 0.85rem !important;
+        }
+      }
+
+      @media screen and (max-width: 480px) {
+        /* 4. PT Cards & Grids: 100% Width */
+        /* Forces grid items to take full width single column */
+        .grid {
+          display: flex !important;
+          flex-direction: column !important;
+          gap: 1.5rem !important;
+        }
+
+        /* Ensure cards inside grid take full width */
+        .grid > div {
+          width: 100% !important;
+        }
+
+        /* Hero Text Resizing */
+        h1 {
+          font-size: 2.25rem !important; /* ~36px */
+          line-height: 1.2 !important;
+        }
+
+        /* Prevent Input Zoom on iOS */
+        input, select, textarea {
+          font-size: 16px !important;
+        }
+
+        /* Footer Alignment */
+        footer .max-w-7xl {
+          text-align: center;
+        }
+      }
+    </style>
+  <script type="importmap">
+{
+  "imports": {
+    "@google/genai": "https://aistudiocdn.com/@google/genai@^1.30.0",
+    "react/": "https://aistudiocdn.com/react@^19.2.1/",
+    "react": "https://aistudiocdn.com/react@^19.2.1",
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.1/"
+  }
+}
+</script>
+</head>
+  <body>
+    <div id="root"></div>
+  </body>
+</html>
